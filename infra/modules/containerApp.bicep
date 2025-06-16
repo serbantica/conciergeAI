@@ -3,6 +3,9 @@ param image string
 param location string
 param envVars object
 param managedEnvName string
+@secure()
+param acrPassword string
+param acrUsername string = 'YOUR_USERNAME'
 
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -15,20 +18,22 @@ managedEnvironmentId: resourceId('Microsoft.App/managedEnvironments', managedEnv
       ingress: {
         external: true
         targetPort: 8000
+        transport: 'auto'
       }
-      registries: [
-        {
-          server: 'myregistry.azurecr.io'
-          username: 'ACR_USERNAME'
-          passwordSecretRef: 'acrPassword'
-        }
-      ]
       secrets: [
         {
           name: 'acrPassword'
-          value: 'YOUR_PASSWORD'
+          value: acrPassword
         }
       ]
+      registries: [
+        {
+          server: 'myregistry.azurecr.io'
+          username: acrUsername
+          passwordSecretRef: 'acrPassword'
+        }
+      ]
+
       environmentVariables: [
         for key in envVars: {
           name: key
