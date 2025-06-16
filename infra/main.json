@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.36.1.42791",
+      "templateHash": "11685535177141456842"
+    }
+  },
+  "parameters": {
+    "deployOrchestrator": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Deploy orchestrator (FastAPI)"
+      }
+    },
+    "agentList": {
+      "type": "array",
+      "defaultValue": [
+        "calendar",
+        "todo"
+      ],
+      "metadata": {
+        "description": "List of agents to deploy"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location of the deployment"
+      }
+    }
+  },
+  "resources": [],
+  "outputs": {
+    "orchestratorDeployed": {
+      "type": "bool",
+      "value": "[parameters('deployOrchestrator')]"
+    },
+    "agents": {
+      "type": "array",
+      "value": "[parameters('agentList')]"
+    }
+  }
+}

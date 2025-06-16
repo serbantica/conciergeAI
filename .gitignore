@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# VSCode
+.vscode/
+
+# Azure
+*.azure*
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# Others
+*.sqlite3
+
+# Draw.io backups and temp files
+*.drawio.bkp
+*.drawio~*
+
+# Logs
+logs/
+*.log
+
+# Environment and config
+.env
+config/config.yaml
+
+# Jupyter and notebook checkpoints
+.ipynb_checkpoints/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Python virtual environments
+venv/
+ENV/

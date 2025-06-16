@@ -1,0 +1,11 @@
+{
+    "openai_gpt4": {
+        "type": "openai",
+        "engine": "text-davinci-003"
+    },
+    "local_llama": {
+        "type": "transformers",
+        "task": "text-generation",
+        "model_name": "huggingface/llama"
+    }
+}
