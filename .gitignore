@@ -40,3 +40,8 @@ Thumbs.db
 # Python virtual environments
 venv/
 ENV/
+.venv/
+
+# UV specific
+.uv_cache/
+uv.lock

@@ -1,0 +1,28 @@
+# Alternative Dockerfile for conda-based builds
+FROM continuumio/miniconda3
+
+# Set working directory
+WORKDIR /app
+
+# Install uv for faster Python package management
+RUN pip install uv
+
+# Copy environment file and install dependencies
+COPY concierge.yml .
+RUN conda env create -f concierge.yml
+
+# Make RUN commands use the new environment
+SHELL ["conda", "run", "-n", "concierge", "/bin/bash", "-c"]
+
+# Install additional packages with uv for speed
+COPY requirements.txt .
+RUN conda run -n concierge uv pip install -r requirements.txt
+
+# Copy app code
+COPY . .
+
+# Expose port for FastAPI/Uvicorn
+EXPOSE 8000
+
+# Default command
+CMD ["conda", "run", "-n", "concierge", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
